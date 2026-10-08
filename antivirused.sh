@@ -4,28 +4,51 @@ malicious_dir="$2"
 interval_secs="$3"
 
 mkdir -p "$malicious_dir"
+
 if [ ! -d "$dir" ] 
 then 
     echo "$dir is not found"
     exit 1
 fi    
 
+scan (){
     for file in "$dir"/*
-    do
-        if [ -f "$file" ]
-        then
-            if [[ "$file" =~ \.(exe|bat|vbs|scr|ps1)$ ]]
+        do
+            if [ -f "$file" ]
             then
-                cp "$file" "$malicious_dir"
-                rm "$file"
-                
-            elif grep -q -i -E "virus|trojan|malware|worm|ransomware" "$file"; 
-            then
-                cp "$file" "$malicious_dir"
-                rm "$file"
+                if [[ "$file" =~ \.(exe|bat|vbs|scr|ps1)$ ]]
+                then
+                    cp "$file" "$malicious_dir"
+                    rm "$file"
+                    
+                elif grep -q -i -E "virus|trojan|malware|worm|ransomware" "$file"; 
+                then
+                    cp "$file" "$malicious_dir"
+                    rm "$file"
+                    echo "$file is malicious and it is DELETED"
+                fi
             fi
-        fi
-    done
+        done
+}
+
+
+
+
+scan
+ls -l "$dir" > directory-info.last
+while true
+do
+    sleep "$interval_secs"
+    ls -l "$dir" > directory-info.new
+
+    if cmp -s directory-info.last directory-info.new
+    then
+        echo "no changes occured"
+    else
+        scan
+    fi
+    ls -l "$dir" > directory-info.last
+done
 
 
 
