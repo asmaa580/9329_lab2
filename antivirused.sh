@@ -49,6 +49,3 @@ do
     fi
     ls -l "$dir" > directory-info.last
 done
-
-
-

@@ -6,13 +6,14 @@ i=1
 choice1=-1
 choice2=-1
 
+while(true)
+do
 if [ -z "$(ls -A "$malicious_dir")" ]
 then
     echo "No malicious files to review."
     exit 0
 fi
-while(true)
-do
+
 for file in "$malicious_dir"/*
 do
     echo "$i - $file"
