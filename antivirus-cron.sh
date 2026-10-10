@@ -13,7 +13,7 @@ fi
         do
             if [ -f "$file" ]
             then
-                if grep -Fxq -- "$(basename "$file")" whitelist.txt
+                if grep -Fxq -- "$(basename "$file")" /home/asmaa/Desktop/os_lab/9329_lab2/whitelist.txt
                 then
                 echo "$file is whitelisted; skipping"
                 continue

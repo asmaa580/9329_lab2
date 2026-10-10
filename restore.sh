@@ -12,6 +12,8 @@ then
     exit 1
 fi
 
+touch whitelist.txt
+
 while(true)
 do
 if [ -z "$(ls -A "$malicious_dir")" ]
