@@ -1,5 +1,5 @@
 dir = test_dir
-malicious_dir = quarntine
+malicious_dir = quarantine
 interval_secs = 5
 
 
@@ -8,7 +8,7 @@ pre_build:
 
 
 antivirus: pre_build
-		@./antivirused.sh "$(dir)" "$(malicious_dir)" "$(interval_secs)"
+		@./antivirusd.sh "$(dir)" "$(malicious_dir)" "$(interval_secs)"
 
 
 restore: pre_build
