@@ -12,11 +12,11 @@ then
 fi    
 
 scan (){
-    for file in "$dir"/*
+    for file in "$dir"/*    # (/*)refers to the entries inside the directory. 
         do
             if [ -f "$file" ]
             then
-                if grep -Fxq -- "$(basename "$file")" whitelist.txt
+                if grep -Fxq -- "$(basename "$file")" whitelist.txt #(f->treats as literal string not expression, x-> the whole line should be like th e expression, q-_in scilence)
                 then
                 echo "$file is whitelisted; skipping"
                 continue
@@ -55,4 +55,4 @@ do
         scan
         ls -l "$dir" > directory-info.last
     fi
-    done
+done

@@ -59,7 +59,7 @@ if [ "$choice2" -eq 1 ]
 then 
     cp "$file" "$dir" 
     rm "$file"
-    echo $(basename "$file") >> whitelist.txt
+    echo $(basename "$file") >> whitelist.txt   #(>>) apend to the file but dont overwrite it 
     echo "Restored $(basename "$file")  to $dir"
     echo "Added $(basename "$file")  to whitelist"
 elif [ "$choice2" -eq 2 ]
